@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- social:start -->
+<meta name="description" content="Session 5 of 6. Thin marks, recessive scaffolding, direct labels instead of a legend, text in text colours, the hover layer, and the table view that is not a consolation prize.">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Learn with Phoebe">
+<meta property="og:title" content="Marks and anatomy - learn dataviz with phoebe">
+<meta property="og:description" content="Session 5 of 6. The grid is scaffolding, not data.">
+<meta property="og:url" content="https://phoebefu6.github.io/learn-dataviz-with-phoebe/courses/05-marks-and-anatomy.html">
+<meta property="og:image" content="https://phoebefu6.github.io/learn-dataviz-with-phoebe/assets/og-cover.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Marks and anatomy - learn dataviz with phoebe">
+<meta name="twitter:description" content="Session 5 of 6. Direct labels, recessive grid, and the table view.">
+<meta name="twitter:image" content="https://phoebefu6.github.io/learn-dataviz-with-phoebe/assets/og-cover.png">
+<!-- social:end -->
+<title>Session 5 · Marks and anatomy - learn dataviz with phoebe</title>
+<link rel="stylesheet" href="../assets/style.css?v=2">
+</head>
+<body>
+
+<div class="toolbar">
+  <div class="wrap">
+    <span class="crumb"><a href="../index.html">learn-dataviz-with-phoebe</a> / Session 5 of 6</span>
+    <button class="btn" id="toggle-all" type="button">Expand all</button>
+    <button class="btn primary" id="zoom-toggle" type="button">Projector zoom: off</button>
+  </div>
+</div>
+
+<header class="masthead">
+  <div class="wrap">
+    <div class="eyebrow">Learn Data Visualization with Phoebe · Session 5 of 6</div>
+    <h1>Marks and <span class="accent">anatomy</span></h1>
+    <p class="sub">By this point the chart is honest and its colour has a job. Tonight is entirely subtraction: making the scaffolding recede until somebody looks for it, replacing the legend with labels on the marks themselves, keeping text in text colours, and adding the two things an HTML chart should always have and almost never does - a hover layer and a table view.</p>
+    <div class="chip-row">
+      <span class="chip level">🟠 Hands-on</span>
+      <span class="chip audience">Bring a busy chart</span>
+      <span class="chip audience">Halfway scorecard tonight</span>
+      <span class="chip time">45 min</span>
+    </div>
+    <div class="agenda">
+      <span class="a1" style="flex:1">0-3 · Welcome</span>
+      <span class="a2" style="flex:4">3-18 · Recede, label, and the hover layer</span>
+      <span class="a3" style="flex:5">18-40 · Build-along: strip one chart</span>
+      <span class="a4" style="flex:1">40-45 · Q&amp;A</span>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <!-- ============ INTRO ============ -->
+  <section class="section" id="intro">
+    <div class="section-kicker">
+      <span class="klabel">Part 0</span>
+      <h2>Where we are</h2>
+    </div>
+    <p class="lede">Sessions 3 and 4 were about being right. Tonight is about being read, and almost all of it is removing things you already put in.</p>
+
+    <div class="legend">
+      <span class="pill">🎫 Clear all three quiz questions to stamp your passport</span>
+      <span class="pill">Live = presented in the 45 minutes</span>
+      <span class="pill">Self-study = the full depth, after class</span>
+    </div>
+
+    <div class="callout win">
+      <p><strong>★ What you walk out with tonight.</strong> One chart stripped to its marks, its legend replaced by labels, a hover layer specified, a table view added, and a halfway grade.</p>
+    </div>
+  </section>
+
+  <!-- ============ PART 1 ============ -->
+  <section class="section" id="part-1">
+    <div class="section-kicker">
+      <span class="klabel">Part 1 · covers recession</span>
+      <h2>The grid is scaffolding, not data</h2>
+      <span class="tag concept">6 min live</span>
+    </div>
+    <p class="lede">Everything that is not the data should be quieter than the data. That single instruction fixes about half of what makes a chart look amateur, and it costs nothing.</p>
+
+    <figure class="zoomable">
+      <svg viewBox="0 0 880 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Chart elements ranked by how visually loud they should be, from the data marks down to the grid">
+        <style>
+          .v5rH { font: 800 12px Inter, sans-serif; fill: #17303A; }
+          .v5rB { font: 400 12px Inter, sans-serif; fill: #12262C; }
+          .v5rN { font: 400 11.5px Inter, sans-serif; fill: #5A6E75; }
+        </style>
+        <text class="v5rH" x="40" y="30">Loudest</text>
+        <line x1="40" y1="42" x2="840" y2="42" stroke="#DCE7E9"/>
+
+        <rect x="40" y="54" width="440" height="26" rx="5" fill="#2a78d6"/>
+        <text class="v5rB" x="500" y="72">The data marks. Everything else exists to serve these</text>
+
+        <rect x="40" y="90" width="330" height="26" rx="5" fill="#2a78d6" fill-opacity=".55"/>
+        <text class="v5rB" x="500" y="108">Direct labels and the title, in ink</text>
+
+        <rect x="40" y="126" width="220" height="26" rx="5" fill="#5A6E75" fill-opacity=".5"/>
+        <text class="v5rB" x="500" y="144">Axis labels and tick values</text>
+
+        <rect x="40" y="162" width="130" height="26" rx="5" fill="#BFD2D6" fill-opacity=".8"/>
+        <text class="v5rB" x="500" y="180">The axis line itself</text>
+
+        <rect x="40" y="198" width="70" height="26" rx="5" fill="#DCE7E9"/>
+        <text class="v5rB" x="500" y="216">Gridlines - visible when looked for, invisible when not</text>
+
+        <text class="v5rH" x="40" y="252">Quietest</text>
+        <text class="v5rN" x="40" y="280">If your gridlines are as dark as your bars, the chart is telling the reader they matter equally.</text>
+      </svg>
+      <figcaption>🔍 Click to zoom - a ranking, and most charts have it roughly upside down</figcaption>
+    </figure>
+
+    <details class="card">
+      <summary><span class="mode live">Live</span>Direct labels beat a legend, nearly always<span class="mini">4 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>A legend is a matching exercise: the reader looks at a mark, goes to the legend, finds the swatch, comes back, and repeats for every series. A direct label is just there.</p>
+        <ul>
+          <li><strong>One series needs no legend at all.</strong> The title names it. A legend box with one entry is pure furniture.</li>
+          <li><strong>Two to four series: label them directly</strong> at the end of the line or inside the bar, and keep a legend as well if the chart appears without its title anywhere.</li>
+          <li><strong>Five or more: you have a session 2 problem.</strong> Small multiples, or grey-the-rest with the one you mean labelled.</li>
+          <li><strong>Never a number on every point.</strong> Label the first, the last, the peak and anything you are making a claim about. Labelling everything is the same as labelling nothing.</li>
+        </ul>
+        <div class="callout tip">
+          <p>Direct labels also do accessibility work: they are the second channel from session 4, and they are what discharges a contrast warning on a lighter series colour. One decision, three problems solved.</p>
+        </div>
+      </div>
+    </details>
+
+    <div class="wipe" data-title="The same chart, before and after subtraction" data-label-a="As the tool made it" data-label-b="After removing things" data-foot="Drag across. No data changed, no colour was added, and nothing was made bigger.">
+      <div class="wipe-a">
+        <p><strong>Dark gridlines both directions, a boxed border, a legend with one entry, the value printed above every bar in the series colour, a y-axis titled "Revenue (USD)", and a drop shadow.</strong></p>
+        <p>Six elements competing with four bars. The reader's eye lands on the grid first because it has the most edges, and the numbers in blue read as part of the data rather than as a description of it.</p>
+      </div>
+      <div class="wipe-b">
+        <p><strong>Four bars. Category names to the left in ink, values inside the bars in white, four faint vertical gridlines, one thin axis line, and the title stating the finding.</strong></p>
+        <p>Nothing was added. The border, the legend, the axis title, the shadow and half the gridlines were removed, and the values changed from the series colour to text colour. It now reads in about a second.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PART 2 ============ -->
+  <section class="section" id="part-2">
+    <div class="section-kicker">
+      <span class="klabel">Part 2 · covers the two missing layers</span>
+      <h2>Hover and the table view</h2>
+      <span class="tag concept">6 min live</span>
+    </div>
+    <p class="lede">An HTML chart is an interactive object whether or not you designed it as one. Two layers cost very little and are missing from most charts on most internal tools.</p>
+
+    <figure class="zoomable">
+      <svg viewBox="0 0 880 280" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="The hover layer and the table view, with what each one solves">
+        <style>
+          .v5hH { font: 800 12px Inter, sans-serif; fill: #17303A; }
+          .v5hB { font: 400 11.5px Inter, sans-serif; fill: #12262C; }
+          .v5hN { font: 400 11.5px Inter, sans-serif; fill: #5A6E75; }
+        </style>
+        <rect x="34" y="26" width="404" height="166" rx="10" fill="#EDF3F4" stroke="#264653"/>
+        <text class="v5hH" x="52" y="52">The hover layer</text>
+        <text class="v5hB" x="52" y="78">Crosshair and tooltip on lines and areas.</text>
+        <text class="v5hB" x="52" y="100">Per-mark tooltip on bars, dots and cells.</text>
+        <text class="v5hB" x="52" y="122">Hit target larger than the mark.</text>
+        <text class="v5hN" x="52" y="152">Solves: exact values, without printing a</text>
+        <text class="v5hN" x="52" y="172">number on every point</text>
+
+        <rect x="450" y="26" width="396" height="166" rx="10" fill="#EDF3F4" stroke="#264653"/>
+        <text class="v5hH" x="468" y="52">The table view</text>
+        <text class="v5hB" x="468" y="78">The same data, as rows, behind a</text>
+        <text class="v5hB" x="468" y="100">disclosure the reader can open.</text>
+        <text class="v5hN" x="468" y="130">Solves: screen readers, copy-paste, print,</text>
+        <text class="v5hN" x="468" y="150">a contrast warning, and the person who</text>
+        <text class="v5hN" x="468" y="170">wanted the figures all along</text>
+
+        <rect x="34" y="212" width="812" height="54" rx="10" fill="#EDF3F4" stroke="#264653" stroke-width="1.5"/>
+        <text class="v5hN" x="54" y="238">The table view is not a fallback for people who cannot see the chart. It is where the exact</text>
+        <text class="v5hN" x="54" y="258">numbers live, and a large share of readers wanted those in the first place.</text>
+      </svg>
+      <figcaption>🔍 Click to zoom - the bench in session 3 has both; open the disclosure under its chart</figcaption>
+    </figure>
+
+    <details class="card">
+      <summary><span class="mode self">Self-study</span>Mark specifics worth getting right<span class="mini">4 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <ul>
+          <li><strong>Thin marks.</strong> 2px lines, markers of at least 8px so they can be hovered, bars with a small radius on the data end only - a bar rounded at the baseline is floating.</li>
+          <li><strong>A gap between fills.</strong> Two pixels of surface between stacked segments and between adjacent bars. Without it, two dark segments merge into one shape.</li>
+          <li><strong>A surface ring on overlapping marks.</strong> Two pixels of the background colour around a dot that sits on a line, so the dot reads as in front rather than as a bulge.</li>
+          <li><strong>Text wears text colours.</strong> A value label in the series hue reads as data. Keep labels, values and legends in ink and let the coloured mark beside them carry the identity.</li>
+        </ul>
+        <p>None of these are noticeable individually. Together they are most of the difference between a chart that looks made and one that looks generated, and every one of them is a two-minute change.</p>
+      </div>
+    </details>
+  </section>
+
+  <!-- ============ DEMO ============ -->
+  <section class="section" id="demo-1">
+    <div class="section-kicker">
+      <span class="klabel">Build-along</span>
+      <h2>Strip one chart</h2>
+      <span class="tag demo">★ 22 min · everyone builds</span>
+    </div>
+    <p class="lede">The rule for the next twenty minutes: <strong>you may only remove things and change colours to quieter ones.</strong> Nothing may be added except labels.</p>
+
+    <div class="tick" data-stages="Rank it|Remove|Label|Recolour text|Add the two layers" data-title="Subtraction, in five passes" data-foot="Fifteen minutes on one chart. The constraint is what makes it work - adding is easy and it is not the problem.">
+      <p class="tick-note" data-stage="0"><b>Rank it.</b> List every visible element and order it by how loud it currently is. Compare against the ranking above. Most charts have the grid too high and the labels too low.</p>
+      <p class="tick-note" data-stage="1"><b>Remove.</b> The border, the drop shadow, one direction of gridlines, the axis title if the tick labels already say it, and the legend if there is one series.</p>
+      <p class="tick-note" data-stage="2"><b>Label.</b> Direct labels on the marks. First, last, peak, and anything you are making a claim about - not every point.</p>
+      <p class="tick-note" data-stage="3"><b>Recolour text.</b> Every value, label and legend entry into ink or muted ink. Colour stays on the marks.</p>
+      <p class="tick-note" data-stage="4"><b>Add the two layers.</b> A hover tooltip and a table view. Together they are the only additions allowed tonight, and they remove the pressure to print numbers everywhere.</p>
+    </div>
+
+    <div class="steps">
+      <div class="step"><p><strong>Take your busiest real chart</strong> and list its elements. Ten to fifteen is normal. Four to six is where you are heading.</p></div>
+      <div class="step"><p><strong>Delete the border and the shadow first.</strong> They are pure furniture and nobody has ever missed them.</p></div>
+      <div class="step"><p><strong>Drop one direction of gridlines.</strong> Bars need lines along the value axis only. The perpendicular set is separating categories that are already separated by being separate bars.</p></div>
+      <div class="step"><p><strong>Fade what remains until you have to look for it.</strong> If you can see the grid while reading the data, it is too dark.</p></div>
+      <div class="step"><p><strong>Kill the legend.</strong> One series means no legend. Two to four means direct labels. Five or more means you have a session 2 problem and should go back.</p></div>
+      <div class="step"><p><strong>Recolour every number to ink.</strong> This is the change people find most surprising - coloured value labels look deliberate and read as data.</p></div>
+      <div class="step"><p><strong>Specify the hover and the table.</strong> Write down what the tooltip says and what the table columns are. Even if you are not the one building it, this is a two-line spec.</p></div>
+      <div class="step"><p><strong>Count your elements again</strong> and grade the work below.</p></div>
+    </div>
+
+    <div class="scorecard" data-title="Halfway scorecard: the chart at session 5" data-foot="Five sessions in. This grades one chart, honestly, against everything so far.">
+      <div class="sc-row"><div class="sc-q">The chart has one written question, and the title states its answer
+        <em>From session 1. "Ethiopia Guji earns most, by 21 percent", not "Revenue by roast".</em></div></div>
+      <div class="sc-row"><div class="sc-q">One y-axis, and the form was chosen from the job
+        <em>From session 2. If you wanted a second axis, you found a ratio instead.</em></div></div>
+      <div class="sc-row"><div class="sc-q">Lie factor 1.00, and there is a line saying window, denominator and exclusions
+        <em>From session 3. Bars from zero. The provenance line closes what the lie factor cannot see.</em></div></div>
+      <div class="sc-row"><div class="sc-q">Colour has a named job, and nothing depends on hue alone
+        <em>From session 4. One series one colour, and a label, position or texture as the second channel.</em></div></div>
+      <div class="sc-row"><div class="sc-q">The grid recedes, labels are direct, text is in ink, and there is a table view
+        <em>Tonight. Count the elements: four to six, not twelve.</em></div></div>
+    </div>
+
+    <div class="callout tip">
+      <p><strong>If you take one thing from tonight.</strong> Fade the gridlines until you have to look for them. It takes ten seconds, it changes no data, and it is the single most visible difference between a chart that looks made and one that looks generated.</p>
+    </div>
+  </section>
+
+  <!-- ============ HOMEWORK ============ -->
+  <section class="section" id="exercise">
+    <div class="section-kicker">
+      <span class="klabel">Homework</span>
+      <h2>Before session 6</h2>
+      <span class="tag exercise">25 min</span>
+    </div>
+    <ol>
+      <li><strong>Strip three real charts</strong> by removal only. Count elements before and after.</li>
+      <li><strong>Replace one legend with direct labels</strong> and check nothing was lost.</li>
+      <li><strong>Recolour every value label to ink</strong> in one deck. It is a find-and-replace and it changes how the whole thing reads.</li>
+      <li><strong>Add a table view</strong> to one chart people keep asking you for the numbers from.</li>
+      <li><strong>Open your best chart on a phone</strong> before session 6, and note exactly what breaks. Session 6 is about that.</li>
+    </ol>
+  </section>
+
+  <!-- ============ QUIZ ============ -->
+  <section class="section" id="quiz">
+    <div class="section-kicker">
+      <span class="klabel">Check yourself</span>
+      <h2>Three questions</h2>
+    </div>
+    <p>Clear all three and session 5 gets stamped in your passport.</p>
+
+    <div class="quiz-q" data-answer="1">
+      <p class="qtext">1 · Your value labels are printed in the same colour as the bars. What is wrong?</p>
+      <button class="qopt" type="button">A · Nothing, as long as the contrast against the background passes</button>
+      <button class="qopt" type="button">B · Text wearing a series colour reads as data rather than as a description of data - labels, values and legends belong in ink, and the coloured mark beside them carries the identity</button>
+      <button class="qopt" type="button">C · It makes the chart harder to print in greyscale</button>
+      <p class="qwhy">Contrast is a separate check and it may well pass. The problem is semantic: colour in this chart means something, and putting it on text spends that meaning on an element that is not encoding anything. It is also the change people are most surprised by when they make it.</p>
+    </div>
+
+    <div class="quiz-q" data-answer="2">
+      <p class="qtext">2 · When does a chart not need a legend at all?</p>
+      <button class="qopt" type="button">A · When the audience already knows the categories</button>
+      <button class="qopt" type="button">B · When there are fewer than three series</button>
+      <button class="qopt" type="button">C · When there is one series - the title names it, so a legend box with one entry is pure furniture</button>
+      <p class="qwhy">A legend is a matching exercise, and with one series there is nothing to match. Two to four series get direct labels on the marks instead, which also serves as the second channel from session 4. Five or more is a session 2 problem, not a legend problem.</p>
+    </div>
+
+    <div class="quiz-q" data-answer="0">
+      <p class="qtext">3 · Why is a table view not a consolation prize?</p>
+      <button class="qopt" type="button">A · Because a large share of readers wanted the exact figures all along - and it also serves screen readers, copy-paste, print, and any contrast warning</button>
+      <button class="qopt" type="button">B · Because accessibility guidelines require one</button>
+      <button class="qopt" type="button">C · Because it is quicker to produce than a chart</button>
+      <p class="qwhy">Treating the table as a fallback for people who cannot see the chart misses that it is where the exact numbers live. It solves five separate problems at once, which is an unusual ratio, and it removes the pressure to print a value on every mark.</p>
+    </div>
+
+    <p class="quiz-score"></p>
+  </section>
+
+  <!-- ============ OFFICIAL COVERAGE ============ -->
+  <section class="section" id="official">
+    <div class="section-kicker">
+      <span class="klabel">Sources covered</span>
+      <h2>What this session teaches, and where it came from</h2>
+    </div>
+    <div class="covered">
+      <div class="covered-row"><span class="status pill solid">✓</span><span class="name">Visual loudness, ranked</span><span class="note">Marks, then labels, then axis text, then the axis line, then the grid - and most charts have it upside down</span></div>
+      <div class="covered-row"><span class="status pill solid">✓</span><span class="name">Direct labels over legends</span><span class="note">None for one series, direct for two to four, a session 2 problem beyond that. Never a number on every point</span></div>
+      <div class="covered-row"><span class="status pill solid">✓</span><span class="name">Text wears text colours</span><span class="note">A value label in the series hue reads as data. Colour stays on the marks</span></div>
+      <div class="covered-row"><span class="status pill solid">✓</span><span class="name">Mark specifics</span><span class="note">Thin lines, 8px markers, radius on the data end only, a 2px surface gap between fills, a surface ring on overlaps</span></div>
+      <div class="covered-row"><span class="status pill solid">✓</span><span class="name">The hover layer and the table view</span><span class="note">What each solves, and why the table is where the exact numbers live rather than a fallback</span></div>
+      <div class="covered-row"><span class="status pill light">◐</span><span class="name">Animation</span><span class="note">Named, with the caution that animated transitions between unrelated states teach nothing and cost attention</span></div>
+    </div>
+    <p class="mono" style="margin-top:14px">Full source map: <span class="mono">materials/official-course-map.md</span>. The session 3 bench implements every rule in this session, including the table view.</p>
+  </section>
+
+  <!-- ============ CHEAT SHEET ============ -->
+  <section class="cheat" id="cheatsheet">
+    <h3>Session 5 cheat sheet <span>· pin this</span></h3>
+    <div class="grid-2">
+      <div class="cheat-item"><b>Everything quieter than the data</b><span>Fixes about half of what makes a chart look amateur.</span></div>
+      <div class="cheat-item"><b>Fade the grid</b><span>If you can see it while reading the data, it is too dark.</span></div>
+      <div class="cheat-item"><b>One series, no legend</b><span>The title names it. A one-entry legend is furniture.</span></div>
+      <div class="cheat-item"><b>Not a number on every point</b><span>First, last, peak, and whatever you are claiming.</span></div>
+      <div class="cheat-item"><b>Text in ink</b><span>Values in the series colour read as data.</span></div>
+      <div class="cheat-item"><b>Hover and a table</b><span>The only two things worth adding. The table solves five problems.</span></div>
+    </div>
+  </section>
+
+  <div class="callout next">
+    <span class="nx-pill">Next session</span>
+    <p>The chart is finished, on your monitor. Session 6 is every other place it has to survive: a report, a slide behind you, a phone on a train, and a printer. Dark mode as a second palette rather than an inversion, forced colours, and what a screen reader actually gets when it reaches your chart.</p>
+  </div>
+
+  <footer class="pagefoot">
+    <span>Session 5 of 6 · learn-dataviz-with-phoebe · by Phoebe Fu &nbsp;·&nbsp; 📚 <a href="https://phoebefu6.github.io/learn-with-phoebe/">Learn with Phoebe ↗</a></span>
+    <span><a href="04-colour-that-works.html">← Previous</a> &nbsp;·&nbsp; <a href="06-publishing-it.html">Next: Publishing it →</a></span>
+  </footer>
+
+</main>
+
+<script src="../assets/app.js?v=2"></script>
+</body>
+</html>

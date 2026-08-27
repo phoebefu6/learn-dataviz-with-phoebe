@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- social:start -->
+<meta name="description" content="Session 2 of 6. Bar, line, dot, heatmap - picked by the job rather than by habit. Sorting, small multiples, pie charts honestly assessed, and the one rule with no exceptions: never a dual axis.">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Learn with Phoebe">
+<meta property="og:title" content="Choosing the form - learn dataviz with phoebe">
+<meta property="og:description" content="Session 2 of 6. Two y-scales let the author manufacture any correlation they want.">
+<meta property="og:url" content="https://phoebefu6.github.io/learn-dataviz-with-phoebe/courses/02-choosing-the-form.html">
+<meta property="og:image" content="https://phoebefu6.github.io/learn-dataviz-with-phoebe/assets/og-cover.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Choosing the form - learn dataviz with phoebe">
+<meta name="twitter:description" content="Session 2 of 6. Form by job, sorting for free, and never two y-axes.">
+<meta name="twitter:image" content="https://phoebefu6.github.io/learn-dataviz-with-phoebe/assets/og-cover.png">
+<!-- social:end -->
+<title>Session 2 · Choosing the form - learn dataviz with phoebe</title>
+<link rel="stylesheet" href="../assets/style.css?v=2">
+</head>
+<body>
+
+<div class="toolbar">
+  <div class="wrap">
+    <span class="crumb"><a href="../index.html">learn-dataviz-with-phoebe</a> / Session 2 of 6</span>
+    <button class="btn" id="toggle-all" type="button">Expand all</button>
+    <button class="btn primary" id="zoom-toggle" type="button">Projector zoom: off</button>
+  </div>
+</div>
+
+<header class="masthead">
+  <div class="wrap">
+    <div class="eyebrow">Learn Data Visualization with Phoebe · Session 2 of 6</div>
+    <h1>Choosing the <span class="accent">form</span></h1>
+    <p class="sub">Most people pick a chart type the way they pick a font - from what is at the top of the menu and what they used last time. Tonight the choice comes from the job you named in session 1, which narrows twenty options to about two. Plus the cheapest improvement in this entire discipline, which is sorting, and the one rule here that has no exceptions at all: two measures never share a chart with two y-scales.</p>
+    <div class="chip-row">
+      <span class="chip level">🟢 Easy</span>
+      <span class="chip audience">Anyone who defaults to whatever the tool opened with</span>
+      <span class="chip audience">Bring a chart you are unsure about</span>
+      <span class="chip time">45 min</span>
+    </div>
+    <div class="agenda">
+      <span class="a1" style="flex:1">0-3 · Welcome</span>
+      <span class="a2" style="flex:4">3-18 · The shortlist, sorting, and the dual-axis rule</span>
+      <span class="a3" style="flex:5">18-40 · Build-along: re-form four charts</span>
+      <span class="a4" style="flex:1">40-45 · Q&amp;A</span>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <!-- ============ INTRO ============ -->
+  <section class="section" id="intro">
+    <div class="section-kicker">
+      <span class="klabel">Part 0</span>
+      <h2>Where we are</h2>
+    </div>
+    <p class="lede">Session 1 gave every chart a written question and a named job. Tonight the job picks the shape, and it turns out to pick it fairly narrowly.</p>
+
+    <div class="legend">
+      <span class="pill">🎫 Clear all three quiz questions to stamp your passport</span>
+      <span class="pill">Live = presented in the 45 minutes</span>
+      <span class="pill">Self-study = the full depth, after class</span>
+    </div>
+
+    <div class="callout win">
+      <p><strong>★ What you walk out with tonight.</strong> Four Daybreak charts re-formed from their jobs, one dual axis killed, and a sorted bar chart that is better than its unsorted version for free.</p>
+    </div>
+  </section>
+
+  <!-- ============ PART 1 ============ -->
+  <section class="section" id="part-1">
+    <div class="section-kicker">
+      <span class="klabel">Part 1 · covers the shortlist</span>
+      <h2>The job picks the shape</h2>
+      <span class="tag concept">6 min live</span>
+    </div>
+
+    <figure class="zoomable">
+      <svg viewBox="0 0 880 320" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="A shortlist of chart forms with the job each suits and what each one is bad at">
+        <style>
+          .v2fH { font: 800 12px Inter, sans-serif; fill: #17303A; }
+          .v2fB { font: 400 12px Inter, sans-serif; fill: #12262C; }
+          .v2fN { font: 400 11.5px Inter, sans-serif; fill: #5A6E75; }
+        </style>
+        <text class="v2fH" x="40" y="30">Form</text>
+        <text class="v2fH" x="180" y="30">Good at</text>
+        <text class="v2fH" x="520" y="30">Bad at</text>
+        <line x1="40" y1="42" x2="840" y2="42" stroke="#DCE7E9"/>
+
+        <text class="v2fB" x="40" y="72">Bar</text>
+        <text class="v2fN" x="180" y="72">comparing magnitudes precisely</text>
+        <text class="v2fN" x="520" y="72">many categories, or time with gaps</text>
+
+        <text class="v2fB" x="40" y="104">Line</text>
+        <text class="v2fN" x="180" y="104">change and rate of change</text>
+        <text class="v2fN" x="520" y="104">unordered categories - implies a sequence</text>
+
+        <text class="v2fB" x="40" y="136">Dot</text>
+        <text class="v2fN" x="180" y="136">many categories, sparse values</text>
+        <text class="v2fN" x="520" y="136">part-to-whole, and small differences</text>
+
+        <text class="v2fB" x="40" y="168">Heatmap</text>
+        <text class="v2fN" x="180" y="168">a matrix - cohort against month</text>
+        <text class="v2fN" x="520" y="168">reading exact values off a colour</text>
+
+        <text class="v2fB" x="40" y="200">Stacked bar</text>
+        <text class="v2fN" x="180" y="200">the total, and the biggest part</text>
+        <text class="v2fN" x="520" y="200">comparing the middle segments</text>
+
+        <text class="v2fB" x="40" y="232">Pie</text>
+        <text class="v2fN" x="180" y="232">two or three parts of one whole</text>
+        <text class="v2fN" x="520" y="232">four or more parts. Almost everything else</text>
+
+        <rect x="40" y="252" width="800" height="54" rx="10" fill="#EDF3F4" stroke="#264653" stroke-width="1.5"/>
+        <text class="v2fN" x="60" y="278">Only the last column is ever surprising. Every form is bad at something, and the way to choose</text>
+        <text class="v2fN" x="60" y="298">is to check that the thing it is bad at is not the thing your question was about.</text>
+      </svg>
+      <figcaption>🔍 Click to zoom - pick by what it is bad at, not by what it is good at</figcaption>
+    </figure>
+
+    <details class="card">
+      <summary><span class="mode live">Live</span>Sorting, which is free and almost never done<span class="mini">4 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>A categorical bar chart in the order the data happened to come out of the database asks the reader to scan every bar and hold the largest so far in their head. Sorted by value, the answer is the top row.</p>
+        <ul>
+          <li><strong>Sort by value for magnitude questions.</strong> Which is biggest is now a glance rather than a scan.</li>
+          <li><strong>Keep the natural order when there is one.</strong> Months, sizes, severity levels, survey scales. Sorting those by value destroys the thing the reader uses to orient.</li>
+          <li><strong>Keep the order stable across a set.</strong> If four charts share categories, sort them once, by the same key, or the reader re-learns the layout four times.</li>
+        </ul>
+        <div class="callout tip">
+          <p>This is the highest ratio of improvement to effort anywhere in the course. It changes no data, costs no space, needs no colour decision, and it is missing from most charts in most organisations because the default is whatever order the query returned.</p>
+        </div>
+      </div>
+    </details>
+  </section>
+
+  <!-- ============ PART 2 ============ -->
+  <section class="section" id="part-2">
+    <div class="section-kicker">
+      <span class="klabel">Part 2 · covers the one hard rule</span>
+      <h2>Never two y-axes</h2>
+      <span class="tag concept">6 min live</span>
+    </div>
+    <p class="lede">This is the only rule in this course stated without exceptions, and the reason is not aesthetic. A dual-axis chart lets the author produce whatever relationship they want between two series, by choosing two scales, and the reader has no way to see it happening.</p>
+
+    <figure class="zoomable">
+      <svg viewBox="0 0 880 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="The same two series on a dual axis, shown twice with different right-hand scales, producing opposite apparent relationships">
+        <style>
+          .v2dH { font: 800 12px Inter, sans-serif; fill: #17303A; }
+          .v2dB { font: 400 11.5px Inter, sans-serif; fill: #12262C; }
+          .v2dN { font: 400 11.5px Inter, sans-serif; fill: #5A6E75; }
+        </style>
+        <text class="v2dH" x="40" y="30">Same data. Right-hand scale 0 to 500.</text>
+        <rect x="40" y="42" width="380" height="96" rx="8" fill="#fff" stroke="#DCE7E9"/>
+        <polyline points="60,120 130,108 200,96 270,86 340,74 400,66" fill="none" stroke="#2a78d6" stroke-width="2"/>
+        <polyline points="60,72 130,78 200,84 270,92 340,100 400,110" fill="none" stroke="#eb6834" stroke-width="2" stroke-dasharray="5 3"/>
+        <text class="v2dN" x="60" y="156">Reads as: the two move in opposite directions.</text>
+
+        <text class="v2dH" x="460" y="30">Same data. Right-hand scale 0 to 5,000.</text>
+        <rect x="460" y="42" width="380" height="96" rx="8" fill="#fff" stroke="#DCE7E9"/>
+        <polyline points="480,120 550,108 620,96 690,86 760,74 820,66" fill="none" stroke="#2a78d6" stroke-width="2"/>
+        <polyline points="480,126 550,124 620,122 690,120 760,118 820,116" fill="none" stroke="#eb6834" stroke-width="2" stroke-dasharray="5 3"/>
+        <text class="v2dN" x="480" y="156">Reads as: one is flat while the other climbs.</text>
+
+        <rect x="40" y="176" width="800" height="106" rx="10" fill="#FEF2F2" stroke="#FCA5A5" stroke-width="1.5"/>
+        <text class="v2dH" x="60" y="202" fill="#991B1B">Neither chart contains a false number.</text>
+        <text class="v2dB" x="60" y="226">The author chose a second scale, and the choice produced the relationship. A reader cannot</text>
+        <text class="v2dB" x="60" y="248">audit it, because there is no correct second scale to compare it against - which is exactly</text>
+        <text class="v2dB" x="60" y="270">why this is the one rule with no exceptions rather than a preference.</text>
+      </svg>
+      <figcaption>🔍 Click to zoom - the same two series, two defensible scales, two opposite conclusions</figcaption>
+    </figure>
+
+    <details class="card">
+      <summary><span class="mode live">Live</span>What to do instead, in three moves<span class="mini">4 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <ul>
+          <li><strong>Two charts, stacked, sharing an x-axis.</strong> The simplest fix and almost always the right one. The reader can still see the timing relationship, and neither series is being scaled to flatter the other.</li>
+          <li><strong>Index both to a common base.</strong> Set each series to 100 at the start and plot the change. Now one axis is honest for both, and the question "which grew faster" is answerable directly.</li>
+          <li><strong>Plot the thing you actually mean.</strong> Often the dual axis exists because the real question is a ratio - revenue per subscriber, cost per order. Compute it and plot one series.</li>
+        </ul>
+        <div class="callout example">
+          <span class="ex-pill">The third one is the interesting one</span>
+          <p>When somebody puts signups and revenue on two axes, the question in their head is usually "is each new subscriber worth as much as the last one?" That is revenue per subscriber - a single series, one axis, and it answers the question the dual axis was gesturing at without letting anybody choose the answer.</p>
+        </div>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode self">Self-study</span>Small multiples, and when eight series becomes eight charts<span class="mini">4 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>Past about four series, a line chart becomes a plate of spaghetti and the legend becomes a matching exercise. The fix is not a better palette - it is more charts.</p>
+        <ul>
+          <li><strong>Small multiples:</strong> the same chart repeated once per category, on shared axes, small. The eye compares shapes across the grid far better than it untangles overlapping lines.</li>
+          <li><strong>Shared scales are what make it work.</strong> If each panel gets its own y-axis you have made eight unrelated charts that look comparable, which is worse than the spaghetti.</li>
+          <li><strong>Grey the rest.</strong> When one series is the point, draw it in colour and the other seven in light grey on the same axes. Context without competition, and it needs no legend.</li>
+        </ul>
+        <p>The grey-the-rest move is worth having as a reflex. It answers "but I need to show all of them" without giving eight series equal weight, and it is one line of code in any library.</p>
+      </div>
+    </details>
+  </section>
+
+  <!-- ============ DEMO ============ -->
+  <section class="section" id="demo-1">
+    <div class="section-kicker">
+      <span class="klabel">Build-along</span>
+      <h2>Re-form four Daybreak charts</h2>
+      <span class="tag demo">★ 22 min · everyone builds</span>
+    </div>
+    <p class="lede">Four questions from session 1, four forms to choose. Sketch them on paper - the point is the decision, not the rendering.</p>
+
+    <div class="tick" data-stages="Job|Shortlist|Bad at|Sort|Check the axes" data-title="Choosing a form, in five checks" data-foot="Two minutes per chart once you have the habit. Most of the time it confirms what you were going to do, and occasionally it saves you from a dual axis.">
+      <p class="tick-note" data-stage="0"><b>Job.</b> From session 1's five. Magnitude, change, identity, polarity, one number.</p>
+      <p class="tick-note" data-stage="1"><b>Shortlist.</b> The job leaves you two candidates, not twenty. Magnitude gives bar or dot; change gives line.</p>
+      <p class="tick-note" data-stage="2"><b>Bad at.</b> Check what each candidate is bad at, and whether that is your question. A stacked bar is bad at middle segments - if your question is about a middle segment, it is out.</p>
+      <p class="tick-note" data-stage="3"><b>Sort.</b> By value for magnitude; by the natural order where one exists; the same way across a set.</p>
+      <p class="tick-note" data-stage="4"><b>Check the axes.</b> One y-axis. If you find yourself wanting two, you have found either two charts or a ratio you have not computed yet.</p>
+    </div>
+
+    <div class="steps">
+      <div class="step"><p><strong>Chart one: "Which roast earns most in a month?"</strong> Magnitude, four categories. Sorted bar, one series, one colour, axis from zero. This is the bench's chart in session 3.</p></div>
+      <div class="step"><p><strong>Chart two: "Is the subscriber base growing?"</strong> Change over time. Line. Note that it does not have to start at zero - and note that you now need session 3 to explain why that is fine here and a distortion on the bar chart.</p></div>
+      <div class="step"><p><strong>Chart three: "Which cohorts churn fastest?"</strong> A matrix - cohort by month. Heatmap or small multiples. Decide which by asking whether the reader needs exact values, because a heatmap cannot give them.</p></div>
+      <div class="step"><p><strong>Chart four: "Are new subscribers worth as much as old ones?"</strong> This is the trap. It looks like two series - signups and revenue - and it is one: revenue per subscriber. Compute it and plot one line.</p></div>
+      <div class="step"><p><strong>Now find a real dual axis.</strong> In your own work or something you were sent this week. They are everywhere. Decide which of the three fixes applies.</p></div>
+      <div class="step"><p><strong>Sort one real chart</strong> and look at the before and after side by side. This is the moment most people become permanently annoyed by unsorted bar charts.</p></div>
+      <div class="step"><p><strong>Take one spaghetti line chart and grey the rest.</strong> One series in colour, the others in light grey, no legend. Then ask whether you have lost anything.</p></div>
+    </div>
+
+    <div class="callout tip">
+      <p><strong>If you take one thing from tonight.</strong> When you want a second y-axis, the question you actually have is usually a ratio. Compute it and plot one series - it answers the real question and it removes the reader's inability to audit you.</p>
+    </div>
+  </section>
+
+  <!-- ============ HOMEWORK ============ -->
+  <section class="section" id="exercise">
+    <div class="section-kicker">
+      <span class="klabel">Homework</span>
+      <h2>Before session 3</h2>
+      <span class="tag exercise">25 min</span>
+    </div>
+    <ol>
+      <li><strong>Kill one dual axis.</strong> Find a real one, pick the fix, and rebuild it. Note which fix you needed.</li>
+      <li><strong>Sort three bar charts</strong> and look at each before and after.</li>
+      <li><strong>Convert one spaghetti chart</strong> to small multiples or grey-the-rest.</li>
+      <li><strong>Find a chart whose form fights its question.</strong> A line over unordered categories, a stacked bar where the middle segment is the point, a pie with seven slices.</li>
+      <li><strong>Bring your sorted bar chart to session 3</strong>, because session 3 is going to ask whether its axis starts at zero and then measure what happens when it does not.</li>
+    </ol>
+  </section>
+
+  <!-- ============ QUIZ ============ -->
+  <section class="section" id="quiz">
+    <div class="section-kicker">
+      <span class="klabel">Check yourself</span>
+      <h2>Three questions</h2>
+    </div>
+    <p>Clear all three and session 2 gets stamped in your passport.</p>
+
+    <div class="quiz-q" data-answer="2">
+      <p class="qtext">1 · Why is "never two y-axes" stated without exceptions rather than as a preference?</p>
+      <button class="qopt" type="button">A · Because two axes make the chart visually cluttered</button>
+      <button class="qopt" type="button">B · Because most tools implement the second axis badly</button>
+      <button class="qopt" type="button">C · Because the author's choice of second scale produces the apparent relationship, and there is no correct scale for a reader to audit it against</button>
+      <p class="qwhy">The same two series on two defensible right-hand scales can be made to look inversely related or unrelated, with no false number anywhere in either chart. That is not clutter, it is an unauditable claim - which is why it gets a rule rather than a guideline.</p>
+    </div>
+
+    <div class="quiz-q" data-answer="0">
+      <p class="qtext">2 · Somebody wants signups and revenue on one chart with two axes. What is the question they probably have?</p>
+      <button class="qopt" type="button">A · Whether each new subscriber is worth as much as the last - which is revenue per subscriber, one series, one axis</button>
+      <button class="qopt" type="button">B · Whether signups lead or lag revenue in time</button>
+      <button class="qopt" type="button">C · Which of the two grew more in absolute terms</button>
+      <p class="qwhy">Dual axes usually appear where the real question is a ratio nobody has computed. Working out what that ratio is answers the question directly, removes the scale choice, and produces a chart the reader can actually check. B is a real question too, and its fix is two stacked charts sharing an x-axis.</p>
+    </div>
+
+    <div class="quiz-q" data-answer="1">
+      <p class="qtext">3 · When should you NOT sort a bar chart by value?</p>
+      <button class="qopt" type="button">A · When there are fewer than five categories</button>
+      <button class="qopt" type="button">B · When the categories have a natural order - months, sizes, severity levels, survey scales - because sorting destroys what the reader uses to orient</button>
+      <button class="qopt" type="button">C · When the chart will appear next to other charts</button>
+      <p class="qwhy">Sorting is the cheapest improvement available and it has exactly one common exception: an inherent order. Sorting months by value makes a chart nobody can read. Appearing alongside other charts is an argument for sorting them all the same way, not for leaving them unsorted.</p>
+    </div>
+
+    <p class="quiz-score"></p>
+  </section>
+
+  <!-- ============ OFFICIAL COVERAGE ============ -->
+  <section class="section" id="official">
+    <div class="section-kicker">
+      <span class="klabel">Sources covered</span>
+      <h2>What this session teaches, and where it came from</h2>
+    </div>
+    <div class="covered">
+      <div class="covered-row"><span class="status pill solid">✓</span><span class="name">Form by job</span><span class="note">Bar, line, dot, heatmap, stacked bar and pie, each with what it is good at and - the useful column - what it is bad at</span></div>
+      <div class="covered-row"><span class="status pill solid">✓</span><span class="name">Never a dual axis</span><span class="note">Shown as two defensible scales producing two opposite conclusions from identical data, with the three replacements</span></div>
+      <div class="covered-row"><span class="status pill solid">✓</span><span class="name">Sorting</span><span class="note">By value for magnitude, natural order where one exists, the same key across a set. Highest improvement-to-effort ratio in the course</span></div>
+      <div class="covered-row"><span class="status pill solid">✓</span><span class="name">Small multiples and grey-the-rest</span><span class="note">Past four series the fix is more charts, not a better palette - with shared scales as the thing that makes it work</span></div>
+      <div class="covered-row"><span class="status pill solid">✓</span><span class="name">Pie charts, honestly</span><span class="note">Two or three parts of one whole. A bar is better for almost everything else</span></div>
+      <div class="covered-row"><span class="status pill light">◐</span><span class="name">Chart libraries and tooling</span><span class="note">The method is tool-agnostic, and every library can draw all of these badly</span></div>
+    </div>
+    <p class="mono" style="margin-top:14px">Full source map: <span class="mono">materials/official-course-map.md</span>.</p>
+  </section>
+
+  <!-- ============ CHEAT SHEET ============ -->
+  <section class="cheat" id="cheatsheet">
+    <h3>Session 2 cheat sheet <span>· pin this</span></h3>
+    <div class="grid-2">
+      <div class="cheat-item"><b>Choose by what it is bad at</b><span>Every form fails at something. Check that it is not your question.</span></div>
+      <div class="cheat-item"><b>Never two y-axes</b><span>The scale choice makes the relationship, and nobody can audit it.</span></div>
+      <div class="cheat-item"><b>The dual axis is a ratio</b><span>Revenue per subscriber. Compute it, plot one series.</span></div>
+      <div class="cheat-item"><b>Sort it</b><span>Free, changes no data, missing from most charts everywhere.</span></div>
+      <div class="cheat-item"><b>Except natural orders</b><span>Months, sizes, severity, scales. Sorting those destroys orientation.</span></div>
+      <div class="cheat-item"><b>Grey the rest</b><span>One series in colour, seven in grey. Context without competition, no legend.</span></div>
+    </div>
+  </section>
+
+  <div class="callout next">
+    <span class="nx-pill">Next session</span>
+    <p>You have the right shape. Session 3 asks whether it is telling the truth, and answers with arithmetic: a bench that computes the <strong>lie factor from the rectangles it just drew</strong>. Daybreak's roast revenue differs by 21 percent. Truncate the axis - the most ordinary thing in the world - and the chart shows it as 173.</p>
+  </div>
+
+  <footer class="pagefoot">
+    <span>Session 2 of 6 · learn-dataviz-with-phoebe · by Phoebe Fu &nbsp;·&nbsp; 📚 <a href="https://phoebefu6.github.io/learn-with-phoebe/">Learn with Phoebe ↗</a></span>
+    <span><a href="01-what-is-the-question.html">← Previous</a> &nbsp;·&nbsp; <a href="03-honesty.html">Next: Honesty →</a></span>
+  </footer>
+
+</main>
+
+<script src="../assets/app.js?v=2"></script>
+</body>
+</html>

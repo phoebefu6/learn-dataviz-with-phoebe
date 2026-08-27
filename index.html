@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- social:start -->
+<meta name="description" content="Six sessions, one dataset. Which encoding the question needs, and whether the picture tells the truth - with a bench that computes the lie factor from the chart's own geometry, the contrast from its own colours, and colour-vision separation through a real matrix transform. Free, by Phoebe Fu.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Learn with Phoebe">
+<meta property="og:title" content="Learn Data Visualization with Phoebe">
+<meta property="og:description" content="A 21 percent difference, shown as 173 percent, by a chart nobody thought was dishonest. Six sessions on encoding and truth.">
+<meta property="og:url" content="https://phoebefu6.github.io/learn-dataviz-with-phoebe/">
+<meta property="og:image" content="https://phoebefu6.github.io/learn-dataviz-with-phoebe/assets/og-cover.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Learn Data Visualization with Phoebe">
+<meta name="twitter:description" content="Six sessions on encoding and truth, with a bench that measures the chart it is drawing.">
+<meta name="twitter:image" content="https://phoebefu6.github.io/learn-dataviz-with-phoebe/assets/og-cover.png">
+<!-- social:end -->
+<title>Learn Data Visualization with Phoebe</title>
+<link rel="stylesheet" href="assets/style.css?v=2">
+<style>
+
+  .stats-row { display: flex; gap: 2.4rem; margin-top: 1.5rem; flex-wrap: wrap; }
+  .stat b { display: block; font-size: 2.1rem; font-weight: 800; line-height: 1.05; font-variant-numeric: tabular-nums; }
+  .stat span { font-size: .72rem; opacity: .85; text-transform: uppercase; letter-spacing: .09em; font-weight: 600; }
+
+  .course-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr)); gap: 1rem; margin-top: 1.5rem; }
+  .course-card {
+    border: 1px solid var(--hairline);
+    border-top: 4px solid var(--diff, var(--indigo));
+    border-radius: var(--radius);
+    padding: 1.2rem 1.3rem 1.1rem;
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+    text-decoration: none;
+    color: var(--ink);
+    background: #fff;
+    transition: box-shadow .15s ease, border-color .15s ease, transform .15s ease;
+    position: relative;
+  }
+  .course-card:hover { border-color: var(--indigo-soft); border-top-color: var(--diff, var(--indigo)); box-shadow: 0 8px 28px rgba(38,70,83,.14); transform: translateY(-3px); }
+  .course-card .cicon { font-size: 1.7rem; line-height: 1; }
+  .course-card .cnum { font-size: .72rem; font-weight: 700; color: var(--indigo); text-transform: uppercase; letter-spacing: .1em; }
+  .course-card h3 { font-size: 1.05rem; font-weight: 800; line-height: 1.3; }
+  .course-card p { font-size: .85rem; color: var(--muted); flex: 1; }
+  .course-card .meta { display: flex; gap: .4rem; flex-wrap: wrap; }
+
+  .diff-legend { display: flex; gap: 1rem; margin-top: 1.6rem; font-size: .74rem; color: var(--muted); font-weight: 600; flex-wrap: wrap; }
+  .diff-legend i { display: inline-block; width: .85rem; height: .35rem; border-radius: 999px; margin-right: .35rem; vertical-align: middle; }
+
+  .paths { margin-top: 2.6rem; }
+  .paths h2 { font-size: 1.3rem; font-weight: 800; margin-bottom: .3rem; }
+  .paths .plede { color: var(--muted); font-size: .92rem; margin-bottom: .8rem; }
+  .path { display: flex; gap: .55rem; align-items: center; padding: .75rem 0; border-bottom: .5px solid var(--hairline); flex-wrap: wrap; }
+  .path:last-child { border-bottom: none; }
+  .path b { min-width: 15.5rem; font-size: .9rem; }
+  .path .pstep { background: var(--indigo-50); color: var(--indigo); border-radius: 999px; padding: .16rem .68rem; font-weight: 700; font-size: .8rem; text-decoration: none; transition: all .12s ease; }
+  .path .pstep:hover { background: var(--indigo); color: #fff; }
+  .path .parr { color: var(--faint); font-weight: 700; }
+
+  .mm-section { margin-top: 1.6rem; }
+  .mm-section h2 { font-size: 1.3rem; font-weight: 800; margin-bottom: .2rem; }
+  .mm-section .mm-lede { color: var(--muted); font-size: .92rem; margin-bottom: .4rem; }
+  .mm-wrap { border: 1px solid var(--hairline); border-radius: var(--radius); background: linear-gradient(180deg,#fff,#F6FAFB); padding: .6rem; overflow-x: auto; }
+  .mm-svg { width: 100%; height: auto; display: block; max-width: 60rem; margin: 0 auto; min-width: 34rem; }
+  .mm-link { cursor: pointer; text-decoration: none; }
+  .mm-node rect { transition: opacity .15s ease, filter .15s ease; }
+  .mm-node text { pointer-events: none; }
+  .mm-link:hover .mm-node rect { filter: brightness(1.06); }
+  .mm-edge { transition: opacity .15s ease; }
+
+  .not-this { border: 1px solid var(--hairline); border-left: 4px solid var(--amber); border-radius: var(--radius); background: #fff; padding: 1.1rem 1.3rem; margin-top: 1.2rem; }
+  .not-this h3 { font-size: .95rem; font-weight: 800; margin-bottom: .5rem; }
+</style>
+</head>
+<body>
+
+<header class="masthead">
+  <div class="wrap">
+    <div class="eyebrow">Learn with Phoebe · Visual Thinking &amp; Storytelling</div>
+    <h1>Learn <span class="accent">Data Visualization</span> with Phoebe</h1>
+    <p class="sub">Here is a chart nobody in the meeting thought was dishonest. The difference between the best and worst roast is 21 percent in the data. The picture shows it as 173 percent. Nobody typed a wrong number - the axis simply does not start at zero, and somebody had asked to make it pop. Six sessions on which encoding a question needs and whether the picture is telling the truth, with a bench that computes all of that from the chart it is currently drawing.</p>
+    <div class="stats-row">
+      <div class="stat"><b data-count="6">6</b><span>sessions</span></div>
+      <div class="stat"><b data-count="21">21</b><span>% in the data</span></div>
+      <div class="stat"><b data-count="173">173</b><span>% in the picture</span></div>
+      <div class="stat"><b data-count="3">3</b><span>things measured live</span></div>
+      <div class="stat"><b data-count="45">45</b><span>min per session</span></div>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section class="section">
+    <div class="paths" style="margin-top:0">
+      <h2>The six sessions 📊 <span style="font-size:.85rem;font-weight:600;color:var(--muted)">· one dataset, all the way through</span></h2>
+      <p class="plede">The running dataset is <strong>Daybreak's subscription numbers</strong> - signups, cancellations, revenue by roast, retention by cohort. The coffee-subscription company from the SQL, system-design, product-design, communication and course-design courses. Same numbers every session, so the only thing that changes is the decision you made about them.</p>
+    </div>
+
+    <div class="course-grid">
+      <a class="course-card" href="courses/01-what-is-the-question.html" style="--diff:#34D399">
+        <span class="cicon">❓</span>
+        <span class="cnum">Session 1 · easy</span>
+        <h3>What is the question?</h3>
+        <p>The chart's job decides its form: magnitude, identity, polarity, change, or one headline number. Plus the answer people find hardest to accept, which is that quite often it should not be a chart.</p>
+        <span class="meta"><span class="pill amber">▶ Start here</span></span>
+      </a>
+      <a class="course-card" href="courses/02-choosing-the-form.html" style="--diff:#34D399">
+        <span class="cicon">📐</span>
+        <span class="cnum">Session 2 · easy</span>
+        <h3>Choosing the form</h3>
+        <p>Bar, line, dot, heatmap - picked by the job rather than by habit. Sorting, small multiples, pie charts honestly assessed, and the one rule with no exceptions: never a dual axis.</p>
+        <span class="meta"><span class="pill">never two y-scales</span></span>
+      </a>
+      <a class="course-card" href="courses/03-honesty.html" style="--diff:#FBBF24">
+        <span class="cicon">⚖️</span>
+        <span class="cnum">Session 3 · medium</span>
+        <h3>Honesty</h3>
+        <p>The lie-factor bench. Truncated axes, area against length, 3D, gradients and cherry-picked windows - with the distortion computed from the rectangles the chart actually drew.</p>
+        <span class="meta"><span class="pill amber">★ the bench</span></span>
+      </a>
+      <a class="course-card" href="courses/04-colour-that-works.html" style="--diff:#FBBF24">
+        <span class="cicon">🎨</span>
+        <span class="cnum">Session 4 · medium</span>
+        <h3>Colour that works</h3>
+        <p>The four jobs colour can do, one rule each. Colour-vision deficiency through a real matrix transform, contrast as arithmetic, and why four hues for four bars of the same measure is a mistake.</p>
+        <span class="meta"><span class="pill">compute it, do not judge it</span></span>
+      </a>
+      <a class="course-card" href="courses/05-marks-and-anatomy.html" style="--diff:#FB923C">
+        <span class="cicon">🔎</span>
+        <span class="cnum">Session 5 · hands-on</span>
+        <h3>Marks and anatomy</h3>
+        <p>Thin marks, recessive scaffolding, direct labels instead of a legend, text in text colours, the hover layer, and the table view that is not a consolation prize.</p>
+        <span class="meta"><span class="pill">the grid is not data</span></span>
+      </a>
+      <a class="course-card" href="courses/06-publishing-it.html" style="--diff:#FB923C">
+        <span class="cicon">📤</span>
+        <span class="cnum">Session 6 · hands-on</span>
+        <h3>Publishing it</h3>
+        <p>The same chart in a report, a slide, a phone and print. Dark mode as a second palette rather than an inversion, forced colours, and what a screen reader actually gets.</p>
+        <span class="meta"><span class="pill amber">🔒 four containers</span></span>
+      </a>
+    </div>
+
+    <div class="diff-legend">
+      <span><i style="background:#34D399"></i>easy - everyone</span>
+      <span><i style="background:#FBBF24"></i>medium</span>
+      <span><i style="background:#FB923C"></i>hands-on</span>
+      <span><i style="background:#F87171"></i>hardest</span>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="paths" style="margin-top:0">
+      <h2>Your passport 🎫</h2>
+      <p class="plede">Clear all three quiz questions in a session and it gets stamped. Six stamps means every chart you make from now on has a job and can be checked. Stamps live in this browser only.</p>
+    </div>
+    <div class="pp-strip"></div>
+  </section>
+
+  <section class="section">
+    <div class="not-this">
+      <h3>What this course is not, so you land in the right place 🧭</h3>
+      <table class="clean">
+        <tr><th>If your question is</th><th>Go here instead</th></tr>
+        <tr><td>How do I read a metric and question it?</td><td><span class="mono">learn-data-literacy-with-phoebe</span></td></tr>
+        <tr><td>How do I commission and govern dashboards?</td><td><span class="mono">learn-business-intelligence-with-phoebe</span></td></tr>
+        <tr><td>What does the statistic actually mean?</td><td><span class="mono">learn-statistics-with-phoebe</span></td></tr>
+        <tr><td>How do I turn a set of charts into a story?</td><td><span class="mono">learn-visual-storytelling-with-phoebe</span></td></tr>
+        <tr><td><strong>Which encoding does this question need, and is the picture telling the truth?</strong></td><td><strong>you are in the right place</strong></td></tr>
+      </table>
+      <p style="margin-top:.7rem;font-size:.86rem;color:var(--muted)"><strong>Session 6 is deliberately not about dashboards.</strong> That is business-intelligence's job, and two courses teaching one subject disagree with each other eventually.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="paths">
+      <h2>Choose your path 🗺️</h2>
+      <p class="plede">Three doors into the same conviction: most of what makes a chart good is checkable, and almost nobody checks it.</p>
+      <div class="path"><b>⏱️ I have ninety minutes</b>
+        <a class="pstep" href="courses/02-choosing-the-form.html">2</a><span class="parr">→</span>
+        <a class="pstep" href="courses/03-honesty.html">3</a>
+        <span style="font-size:.82rem;color:var(--muted)">pick the right shape, then find out whether it is lying</span>
+      </div>
+      <div class="path"><b>🎨 Somebody said my charts look amateur</b>
+        <a class="pstep" href="courses/04-colour-that-works.html">4</a><span class="parr">→</span>
+        <a class="pstep" href="courses/05-marks-and-anatomy.html">5</a><span class="parr">→</span>
+        <a class="pstep" href="courses/06-publishing-it.html">6</a>
+        <span style="font-size:.82rem;color:var(--muted)">colour with a job, thin marks, and a chart that survives a phone</span>
+      </div>
+      <div class="path"><b>📊 The whole thing</b>
+        <a class="pstep" href="courses/01-what-is-the-question.html">1</a><span class="parr">→</span>
+        <a class="pstep" href="courses/02-choosing-the-form.html">2</a><span class="parr">→</span>
+        <a class="pstep" href="courses/03-honesty.html">3</a><span class="parr">→</span>
+        <a class="pstep" href="courses/04-colour-that-works.html">4</a><span class="parr">→</span>
+        <a class="pstep" href="courses/05-marks-and-anatomy.html">5</a><span class="parr">→</span>
+        <a class="pstep" href="courses/06-publishing-it.html">6</a>
+        <span style="font-size:.82rem;color:var(--muted)">from the question to a published chart that can be checked</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="paths" style="margin-top:0">
+      <h2>What is honest here 🧾</h2>
+      <p class="plede">Unusually for a course in this estate, almost everything in the signature widget is measured rather than modelled.</p>
+    </div>
+    <table class="clean">
+      <tr><th>Claim</th><th>Status</th></tr>
+      <tr><td>The lie factor</td><td><strong>Really measured</strong> off the drawn geometry - truncate the axis and the number moves because the rectangles moved. Blunt by design: it compares the largest and smallest item, so a chart can score 1.00 and still mislead by its window or its denominator, which session 3 covers separately</td></tr>
+      <tr><td>Contrast</td><td><strong>Really measured.</strong> WCAG 2.1, computed on the chart's own text against its own surface</td></tr>
+      <tr><td>Colour-vision separation</td><td><strong>A real matrix transform</strong> and an OKLab distance - but a simulation of dichromacy, not what a person with that condition sees. Good enough to catch a palette that will fail</td></tr>
+      <tr><td>The chart palette</td><td>The validated categorical default. Lightness, chroma, CVD separation and normal-vision floor all pass; the contrast warning on two slots is discharged by direct labels, which the chart carries</td></tr>
+      <tr><td>Daybreak's numbers</td><td>A teaching dataset. The measurement code is real</td></tr>
+    </table>
+  </section>
+
+  <section class="section mm-section">
+    <h2>The knowledge map 🧠</h2>
+    <p class="mm-lede">The whole course at a glance - hover a session to spotlight its concepts, click any node to jump in.</p>
+    <div class="mm-wrap"><div id="mindmap"></div></div>
+  </section>
+
+  <footer class="pagefoot">
+    <span>learn-dataviz-with-phoebe · by Phoebe Fu &nbsp;·&nbsp; 📚 <a href="https://phoebefu6.github.io/learn-with-phoebe/">Learn with Phoebe ↗</a></span>
+    <span>Source map, every constant and the palette report: <span class="mono">materials/official-course-map.md</span></span>
+  </footer>
+
+</main>
+
+<script>
+window.MINDMAP_DATA = {
+  title: "Learn\nData Viz",
+  centerColor: "#17303A",
+  sessions: [
+    { label: "What is the\nquestion?", href: "courses/01-what-is-the-question.html", color: "#34D399",
+      concepts: [
+        { label: "The chart's job", href: "courses/01-what-is-the-question.html" },
+        { label: "Sometimes not a chart", href: "courses/01-what-is-the-question.html" },
+        { label: "One question each", href: "courses/01-what-is-the-question.html" } ] },
+    { label: "Choosing\nthe form", href: "courses/02-choosing-the-form.html", color: "#34D399",
+      concepts: [
+        { label: "Form by job", href: "courses/02-choosing-the-form.html" },
+        { label: "Never a dual axis", href: "courses/02-choosing-the-form.html" },
+        { label: "Sorting is free", href: "courses/02-choosing-the-form.html" } ] },
+    { label: "Honesty", href: "courses/03-honesty.html", color: "#FBBF24",
+      concepts: [
+        { label: "The lie factor", href: "courses/03-honesty.html" },
+        { label: "21 shown as 173", href: "courses/03-honesty.html" },
+        { label: "Area understates too", href: "courses/03-honesty.html" } ] },
+    { label: "Colour that\nworks", href: "courses/04-colour-that-works.html", color: "#FBBF24",
+      concepts: [
+        { label: "Four jobs of colour", href: "courses/04-colour-that-works.html" },
+        { label: "One series, one hue", href: "courses/04-colour-that-works.html" },
+        { label: "Compute the CVD", href: "courses/04-colour-that-works.html" } ] },
+    { label: "Marks and\nanatomy", href: "courses/05-marks-and-anatomy.html", color: "#FB923C",
+      concepts: [
+        { label: "The grid is not data", href: "courses/05-marks-and-anatomy.html" },
+        { label: "Direct labels", href: "courses/05-marks-and-anatomy.html" },
+        { label: "The table view", href: "courses/05-marks-and-anatomy.html" } ] },
+    { label: "Publishing\nit", href: "courses/06-publishing-it.html", color: "#FB923C",
+      concepts: [
+        { label: "Four containers", href: "courses/06-publishing-it.html" },
+        { label: "Dark is a palette", href: "courses/06-publishing-it.html" },
+        { label: "What the reader gets", href: "courses/06-publishing-it.html" } ] }
+  ]
+};
+</script>
+<script src="assets/mindmap.js?v=2"></script>
+<script src="assets/app.js?v=2"></script>
+</body>
+</html>
